@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PositiveTests extends BaseTest {
@@ -12,21 +13,34 @@ public class PositiveTests extends BaseTest {
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("Black");
         $("#userEmail").setValue("test@test.com");
-        $("#gender-radio-1").click();
-        $("#userNumber").setValue("89224567745");
+        $("#genterWrapper").$(byText("Female")).click();
+        $("#userNumber").setValue("8922456774");
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("April");
-        $(".react-datepicker__year-select").selectOption("1980");
-        $("#dateOfBirthInput").pressEnter();
+        $(".react-datepicker__month-select").click();
+        $(".react-datepicker__month-select").selectOption("March");
+        $(".react-datepicker__year-select").click();
+        $(".react-datepicker__year-select").selectOption("2000");
+        $(".react-datepicker__day--030").click();
+        $("#dateOfBirthInput").pressTab();
         $("#subjectsInput").setValue("Math").pressEnter();
-        $("#hobbies-checkbox-2").click();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
         $("#uploadPicture").uploadFromClasspath("test.jpg");
         $("#currentAddress").setValue("Beograd");
-        $("#react-select-3-input").setValue("NCR").pressEnter();
-        $("#react-select-4-input").setValue("Delhi").pressEnter();
+        $("#state input").setValue("NCR").pressEnter();
+        $("#city input").setValue("Delhi").pressEnter();
         $("#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        $$("tbody tr").findBy(text("Student Name")).shouldHave(text("Alex Black"));
+        $$("tbody tr").findBy(text("Student Email")).shouldHave(text("test@test.com"));
+        $$("tbody tr").findBy(text("Gender")).shouldHave(text("Male"));
+        $$("tbody tr").findBy(text("Mobile")).shouldHave(text("8922456774"));
+        $$("tbody tr").findBy(text("Date of Birth")).shouldHave(text("30 March,2000"));
+        $$("tbody tr").findBy(text("Subjects")).shouldHave(text("Maths"));
+        $$("tbody tr").findBy(text("Hobbies")).shouldHave(text("Reading"));
+        $$("tbody tr").findBy(text("Picture")).shouldHave(text("test.jpg"));
+        $$("tbody tr").findBy(text("Address")).shouldHave(text("Beograd"));
+        $$("tbody tr").findBy(text("State and City")).shouldHave(text("NCR Delhi"));
     }
 
     @Test
