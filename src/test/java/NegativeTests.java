@@ -3,8 +3,11 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static testdata.TestData.*;
 
 public class NegativeTests extends BaseTest {
+
+    String invalidNumber = "89225";
 
     @Test
     void fulFillComplexFormWithoutDataTest() {
@@ -21,7 +24,7 @@ public class NegativeTests extends BaseTest {
         open("/automation-practice-form");
 
         $("#gender-radio-1").click();
-        $("#userNumber").setValue("89224567745");
+        $("#userNumber").setValue(userNumber);
         $("#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldNot(appear);
@@ -31,10 +34,10 @@ public class NegativeTests extends BaseTest {
     void formWithInvalidNumberTest() {
         open("/automation-practice-form");
 
-        $("#firstName").setValue("Alex");
-        $("#lastName").setValue("Black");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
         $("#gender-radio-1").click();
-        $("#userNumber").setValue("89225");
+        $("#userNumber").setValue(invalidNumber);
         $("#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldNot(appear);
@@ -44,13 +47,13 @@ public class NegativeTests extends BaseTest {
     void requiredSimpleFormWithoutNameTest() {
         open("/text-box");
 
-        $("#currentAddress").setValue("Beograd");
-        $("#permanentAddress").setValue("Beograd");
+        $("#currentAddress").setValue(currentAddress);
+        $("#permanentAddress").setValue(permanentAddress);
         $("#submit").click();
 
         $("#name").shouldNot(appear);
         $("#email").shouldNot(appear);
-        $("#output #currentAddress").shouldHave(text("Current Address :Beograd"));
-        $("#output #permanentAddress").shouldHave(text("Permananet Address :Beograd"));
+        $("#output #currentAddress").shouldHave(text("Current Address :" + currentAddress));
+        $("#output #permanentAddress").shouldHave(text("Permananet Address :" + permanentAddress));
     }
 }

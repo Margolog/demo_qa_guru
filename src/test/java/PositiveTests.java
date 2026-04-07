@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static testdata.TestData.*;
 
 public class PositiveTests extends BaseTest {
 
@@ -10,65 +11,65 @@ public class PositiveTests extends BaseTest {
     void fulFillComplexFormTest() {
         open("/automation-practice-form");
 
-        $("#firstName").setValue("Alex");
-        $("#lastName").setValue("Black");
-        $("#userEmail").setValue("test@test.com");
-        $("#genterWrapper").$(byText("Female")).click();
-        $("#userNumber").setValue("8922456774");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
+        $("#genterWrapper").$(byText(gender)).click();
+        $("#userNumber").setValue(userNumber);
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").click();
-        $(".react-datepicker__month-select").selectOption("March");
+        $(".react-datepicker__month-select").selectOption(monthOfBirth);
         $(".react-datepicker__year-select").click();
-        $(".react-datepicker__year-select").selectOption("2000");
+        $(".react-datepicker__year-select").selectOption(yearOfBirth);
         $(".react-datepicker__day--030").click();
         $("#dateOfBirthInput").pressTab();
-        $("#subjectsInput").setValue("Math").pressEnter();
-        $("#hobbiesWrapper").$(byText("Reading")).click();
-        $("#uploadPicture").uploadFromClasspath("test.jpg");
-        $("#currentAddress").setValue("Beograd");
-        $("#state input").setValue("NCR").pressEnter();
-        $("#city input").setValue("Delhi").pressEnter();
+        $("#subjectsInput").setValue(subjects).pressEnter();
+        $("#hobbiesWrapper").$(byText(hobbies)).click();
+        $("#uploadPicture").uploadFromClasspath(picture);
+        $("#currentAddress").setValue(currentAddress);
+        $("#state input").setValue(state).pressEnter();
+        $("#city input").setValue(city).pressEnter();
         $("#submit").click();
 
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $$("tbody tr").findBy(text("Student Name")).shouldHave(text("Alex Black"));
-        $$("tbody tr").findBy(text("Student Email")).shouldHave(text("test@test.com"));
-        $$("tbody tr").findBy(text("Gender")).shouldHave(text("Male"));
-        $$("tbody tr").findBy(text("Mobile")).shouldHave(text("8922456774"));
-        $$("tbody tr").findBy(text("Date of Birth")).shouldHave(text("30 March,2000"));
-        $$("tbody tr").findBy(text("Subjects")).shouldHave(text("Maths"));
-        $$("tbody tr").findBy(text("Hobbies")).shouldHave(text("Reading"));
-        $$("tbody tr").findBy(text("Picture")).shouldHave(text("test.jpg"));
-        $$("tbody tr").findBy(text("Address")).shouldHave(text("Beograd"));
-        $$("tbody tr").findBy(text("State and City")).shouldHave(text("NCR Delhi"));
+        $("#example-modal-sizes-title-lg").shouldHave(text(successForm));
+        $$("tbody tr").findBy(text("Student Name")).shouldHave(text(fullName));
+        $$("tbody tr").findBy(text("Student Email")).shouldHave(text(userEmail));
+        $$("tbody tr").findBy(text("Gender")).shouldHave(text(gender));
+        $$("tbody tr").findBy(text("Mobile")).shouldHave(text(userNumber));
+        $$("tbody tr").findBy(text("Date of Birth")).shouldHave(text(fullDateOfBirth));
+        $$("tbody tr").findBy(text("Subjects")).shouldHave(text(subjects));
+        $$("tbody tr").findBy(text("Hobbies")).shouldHave(text(hobbies));
+        $$("tbody tr").findBy(text("Picture")).shouldHave(text(picture));
+        $$("tbody tr").findBy(text("Address")).shouldHave(text(currentAddress));
+        $$("tbody tr").findBy(text("State and City")).shouldHave(text(state + " " + city));
     }
 
     @Test
     void requiredFillComplexFormTest() {
         open("/automation-practice-form");
 
-        $("#firstName").setValue("Alex");
-        $("#lastName").setValue("Black");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
         $("#gender-radio-1").click();
-        $("#userNumber").setValue("89224567745");
+        $("#userNumber").setValue(userNumber);
         $("#submit").click();
 
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        $("#example-modal-sizes-title-lg").shouldHave(text(successForm));
     }
 
     @Test
     void requiredSimpleFormTest() {
         open("/text-box");
 
-        $("#userName").setValue("Alex Black");
-        $("#userEmail").setValue("test@test.com");
-        $("#currentAddress").setValue("Beograd");
-        $("#permanentAddress").setValue("Beograd");
+        $("#userName").setValue(fullName);
+        $("#userEmail").setValue(userEmail);
+        $("#currentAddress").setValue(currentAddress);
+        $("#permanentAddress").setValue(permanentAddress);
         $("#submit").click();
 
-        $("#name").shouldHave(text("Name:Alex Black"));
-        $("#email").shouldHave(text("Email:test@test.com"));
-        $("#output #currentAddress").shouldHave(text("Current Address :Beograd"));
-        $("#output #permanentAddress").shouldHave(text("Permananet Address :Beograd"));
+        $("#name").shouldHave(text("Name:"+ fullName));
+        $("#email").shouldHave(text("Email:" + userEmail));
+        $("#output #currentAddress").shouldHave(text("Current Address :" + currentAddress));
+        $("#output #permanentAddress").shouldHave(text("Permananet Address :" + permanentAddress));
     }
 }
