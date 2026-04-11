@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationCheckComponent;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -30,6 +30,7 @@ public class RegistrationPage {
     private SelenideElement cityInput = $("#city input");
     private SelenideElement submitButton = $("#submit");
     private SelenideElement outputResultsTitle = $("#example-modal-sizes-title-lg");
+    private SelenideElement userForm = $("#userForm");
 
     //Actions
     public RegistrationPage openPage() {
@@ -71,13 +72,11 @@ public class RegistrationPage {
 
     public RegistrationPage typeSubjects(String value) {
         subjectsInput.setValue(value).pressEnter();
-        ;
         return this;
     }
 
     public RegistrationPage typeHobbies(String value) {
         hobbiesInput.$(byText(value)).click();
-        ;
         return this;
     }
 
@@ -111,8 +110,18 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage registrationCheck(String key, String value) {
+    public RegistrationPage checkRegistrationResult(String key, String value) {
         registrationCheck.checkFormResults(key, value);
+        return this;
+    }
+
+    public RegistrationPage checkValidateUserForm() {
+        userForm.shouldHave(cssClass("was-validated"));
+        return this;
+    }
+
+    public RegistrationPage checkTitleNotShow() {
+        outputResultsTitle.shouldNotBe(visible);
         return this;
     }
 }
