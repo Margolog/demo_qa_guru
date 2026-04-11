@@ -1,7 +1,7 @@
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import pages.RegistrarionPage;
+import pages.RegistrationPage;
 import pages.TexBoxPage;
 
 
@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class BaseTest {
     TexBoxPage texBoxPage = new TexBoxPage();
-    RegistrarionPage registrarionPage = new RegistrarionPage();
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @BeforeAll
     static void beforeAll() {
