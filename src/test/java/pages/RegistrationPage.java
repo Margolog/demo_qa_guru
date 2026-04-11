@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationCheckComponent;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -28,6 +29,7 @@ public class RegistrationPage {
     private SelenideElement stateInput = $("#state input");
     private SelenideElement cityInput = $("#city input");
     private SelenideElement submitButton = $("#submit");
+    private SelenideElement outputResultsTitle = $("#example-modal-sizes-title-lg");
 
     //Actions
     public RegistrationPage openPage() {
@@ -104,9 +106,13 @@ public class RegistrationPage {
         return this;
     }
 
+    public RegistrationPage checkTitle(String value) {
+        outputResultsTitle.shouldHave(text(value));
+        return this;
+    }
+
     public RegistrationPage registrationCheck(String key, String value) {
-        registrationCheck.checkTitle("Thanks for submitting the form");
-        registrationCheck.checkField(key, value);
+        registrationCheck.checkFormResults(key, value);
         return this;
     }
 }
