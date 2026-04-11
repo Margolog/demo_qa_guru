@@ -21,16 +21,16 @@ public class PositiveTests extends BaseTest {
                 .typeCity(city)
                 .clickSubmitForm()
                 .checkTitle(successForm)
-                .registrationCheck("Student Name", fullName)
-                .registrationCheck("Student Email", userEmail)
-                .registrationCheck("Gender", gender)
-                .registrationCheck("Mobile", userNumber)
-                .registrationCheck("Date of Birth", fullDateOfBirth)
-                .registrationCheck("Subjects", subjects)
-                .registrationCheck("Hobbies", hobbies)
-                .registrationCheck("Picture", picture)
-                .registrationCheck("Address", currentAddress)
-                .registrationCheck("State and City", state + " " + city);
+                .checkRegistrationResult("Student Name", fullName)
+                .checkRegistrationResult("Student Email", userEmail)
+                .checkRegistrationResult("Gender", gender)
+                .checkRegistrationResult("Mobile", userNumber)
+                .checkRegistrationResult("Date of Birth", fullDateOfBirth)
+                .checkRegistrationResult("Subjects", subjects)
+                .checkRegistrationResult("Hobbies", hobbies)
+                .checkRegistrationResult("Picture", picture)
+                .checkRegistrationResult("Address", currentAddress)
+                .checkRegistrationResult("State and City", state + " " + city);
     }
 
     @Test
