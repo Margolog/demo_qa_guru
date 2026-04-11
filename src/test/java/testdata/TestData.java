@@ -16,6 +16,7 @@ public class TestData {
     public static String hobbies = "Reading";
     public static String yearOfBirth = "2000";
     public static String monthOfBirth = "March";
+    public static String dayOfBirth = "20";
     public static String fullDateOfBirth = "30 March,2000";
     public static String picture = "img/test.jpg";
 }
