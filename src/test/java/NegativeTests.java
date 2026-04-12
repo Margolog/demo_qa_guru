@@ -4,7 +4,7 @@ import static testdata.TestData.*;
 
 public class NegativeTests extends BaseTest {
 
-    String invalidNumber = "89225";
+    String invalidNumber = "89226";
 
     @Test
     void fulFillComplexFormWithoutDataTest() {
