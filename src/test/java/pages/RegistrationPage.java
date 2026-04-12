@@ -76,7 +76,9 @@ public class RegistrationPage {
     }
 
     public RegistrationPage typeHobbies(String value) {
-        hobbiesInput.$(byText(value)).click();
+        hobbiesInput.$$("label")
+                .findBy(text(value))
+                .click();
         return this;
     }
 

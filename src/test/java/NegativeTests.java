@@ -30,7 +30,7 @@ public class NegativeTests extends BaseTest {
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeUserGender(gender)
-                .typeUserNumber(userNumber)
+                .typeUserNumber(invalidNumber)
                 .clickSubmitForm()
                 .checkTitleNotShow();
 
