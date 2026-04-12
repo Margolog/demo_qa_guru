@@ -15,7 +15,7 @@ public class PositiveTests extends BaseTest {
                 .setDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth)
                 .typeSubjects(subjects)
                 .typeHobbies(hobbies)
-                .uploadPhoto(picture)
+                .uploadPhoto(picturePath)
                 .typeCurrentAddress(currentAddress)
                 .typeState(state)
                 .typeCity(city)
@@ -28,7 +28,7 @@ public class PositiveTests extends BaseTest {
                 .checkRegistrationResult("Date of Birth", fullDateOfBirth)
                 .checkRegistrationResult("Subjects", subjects)
                 .checkRegistrationResult("Hobbies", hobbies)
-                .checkRegistrationResult("Picture", picture)
+                .checkRegistrationResult("Picture", pictureName)
                 .checkRegistrationResult("Address", currentAddress)
                 .checkRegistrationResult("State and City", state + " " + city);
     }
