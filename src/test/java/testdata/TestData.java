@@ -18,5 +18,7 @@ public class TestData {
     public static String monthOfBirth = "March";
     public static String dayOfBirth = "20";
     public static String fullDateOfBirth = "20 March,2000";
-    public static String picture = "img/test.jpg";
+    public static String picturePath = "img/test.jpg";
+    public static final String pictureName = "test.jpg";
 }
+
