@@ -12,7 +12,7 @@ public class BaseTest {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @BeforeAll
-    static void beforeAll() {
+    static void setupSelenideEnv() {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
