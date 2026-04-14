@@ -18,8 +18,8 @@ public class NegativeTests extends BaseTest {
     @Test
     void formWithoutFullNameTest() {
         registrationPage.openPage()
-                .typeUserGender(gender)
-                .typeUserNumber(userNumber)
+                .typeUserGender(testData.gender)
+                .typeUserNumber(testData.userNumber)
                 .clickSubmitForm()
                 .checkTitleNotShow();
     }
@@ -27,9 +27,9 @@ public class NegativeTests extends BaseTest {
     @Test
     void formWithInvalidNumberTest() {
         registrationPage.openPage()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typeUserGender(gender)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .typeUserGender(testData.gender)
                 .typeUserNumber(invalidNumber)
                 .clickSubmitForm()
                 .checkTitleNotShow();
@@ -39,12 +39,12 @@ public class NegativeTests extends BaseTest {
     @Test
     void requiredSimpleFormWithoutNameTest() {
         texBoxPage.openPage()
-                .typeCurrentAddress(currentAddress)
-                .typePermanentAddress(permanentAddress)
+                .typeCurrentAddress(testData.currentAddress)
+                .typePermanentAddress(testData.permanentAddress)
                 .clickSubmitForm()
                 .checkFieldNotExist("name")
                 .checkFieldNotExist("email")
-                .checkField("currentAddress", currentAddress)
-                .checkField("permanentAddress", permanentAddress);
+                .checkField("currentAddress", testData.currentAddress)
+                .checkField("permanentAddress", testData.permanentAddress);
     }
 }
