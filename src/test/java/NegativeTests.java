@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.$;
 import static io.qameta.allure.Allure.step;
 
 public class NegativeTests extends BaseTest {
@@ -14,9 +15,10 @@ public class NegativeTests extends BaseTest {
                 registrationPage.openPage());
         step("Не заполняя форму еликнуть на Submit", () ->
                 registrationPage.clickSubmitForm());
-        step("Проверить результат", () ->
-                registrationPage.checkValidateUserForm()
-                        .checkTitleNotShow());
+        step("Проверить результат", () -> {
+            registrationPage.checkValidateUserForm()
+                    .checkTitleNotShow();
+        });
 
     }
 
@@ -25,10 +27,11 @@ public class NegativeTests extends BaseTest {
     void formWithoutFullNameTest() {
         step("Открыть главную страницу", () ->
                 registrationPage.openPage());
-        step("Заполнить форму, указав только гендер и телефон", () ->
-                registrationPage.typeUserGender(testData.gender)
-                        .typeUserNumber(testData.userNumber)
-                        .clickSubmitForm());
+        step("Заполнить форму, указав только гендер и телефон", () -> {
+            registrationPage.typeUserGender(testData.gender)
+                    .typeUserNumber(testData.userNumber)
+                    .clickSubmitForm();
+        });
         step("Проверить, что title не отображается", () ->
                 registrationPage.checkTitleNotShow());
     }
@@ -38,12 +41,13 @@ public class NegativeTests extends BaseTest {
     void formWithInvalidNumberTest() {
         step("Открыть главную страницу", () ->
                 registrationPage.openPage());
-        step("Заполнить форму, указав невалидный номер", () ->
-                registrationPage.typeFirstName(testData.firstName)
-                        .typeLastName(testData.lastName)
-                        .typeUserGender(testData.gender)
-                        .typeUserNumber(invalidNumber))
-                .clickSubmitForm();
+        step("Заполнить форму, указав невалидный номер", () -> {
+            registrationPage.typeFirstName(testData.firstName)
+                    .typeLastName(testData.lastName)
+                    .typeUserGender(testData.gender)
+                    .typeUserNumber(invalidNumber)
+                    .clickSubmitForm();
+        });
         step("Проверить, что title не отображается", () ->
                 registrationPage.checkTitleNotShow());
 
@@ -54,14 +58,16 @@ public class NegativeTests extends BaseTest {
     void requiredSimpleFormWithoutNameTest() {
         step("Открыть главную страницу", () ->
                 texBoxPage.openPage());
-        step("Заполнить форму без указания имени", () ->
-                texBoxPage.typeCurrentAddress(testData.currentAddress)
-                        .typePermanentAddress(testData.permanentAddress)
-                        .clickSubmitForm());
-        step("Проверить, что title не отображается", () ->
-                texBoxPage.checkFieldNotExist("name")
-                        .checkFieldNotExist("email")
-                        .checkField("currentAddress", testData.currentAddress)
-                        .checkField("permanentAddress", testData.permanentAddress));
+        step("Заполнить форму без указания имени", () -> {
+            texBoxPage.typeCurrentAddress(testData.currentAddress)
+                    .typePermanentAddress(testData.permanentAddress)
+                    .clickSubmitForm();
+        });
+        step("Проверить, что title не отображается", () -> {
+            texBoxPage.checkFieldNotExist("name")
+                    .checkFieldNotExist("email")
+                    .checkField("currentAddress", testData.currentAddress)
+                    .checkField("permanentAddress", testData.permanentAddress);
+        });
     }
 }
