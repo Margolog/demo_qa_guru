@@ -20,8 +20,13 @@ public class BaseTest {
     RegistrationPage registrationPage = new RegistrationPage();
     TestData testData;
 
+    @BeforeEach
+    void addListener() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
+
     @BeforeAll
-    static void setupSelenideEnv() {
+    static void beforeAll() {
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
@@ -31,11 +36,6 @@ public class BaseTest {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-    }
-
-    @BeforeEach
-    void addListener() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
     @BeforeEach
@@ -50,10 +50,6 @@ public class BaseTest {
         Attach.pageSource();
         Attach.addVideo();
         Attach.browserConsoleLogs();
-    }
-
-    @AfterEach
-    void tearDriver(){
         closeWebDriver();
     }
 }
