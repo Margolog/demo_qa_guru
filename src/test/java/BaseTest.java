@@ -51,6 +51,10 @@ public class BaseTest {
         Attach.pageSource();
         Attach.addVideo();
         Attach.browserConsoleLogs();
+    }
 
+    @AfterEach
+    void tearDriver(){
+        closeWebDriver();
     }
 }
