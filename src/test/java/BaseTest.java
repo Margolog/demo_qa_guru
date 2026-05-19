@@ -21,6 +21,11 @@ public class BaseTest {
     TestData testData;
 
     @BeforeEach
+    void setUpTestData() {
+        testData = new TestData();
+    }
+
+    @BeforeEach
     void addListener() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
@@ -66,7 +71,6 @@ public class BaseTest {
         );
     }
 
-
     @AfterEach
     void down() {
         closeWebDriver();
@@ -78,7 +82,6 @@ public class BaseTest {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
-//        Attach.attachAsText("Some file", "Some content");
         closeWebDriver();
     }
 }
