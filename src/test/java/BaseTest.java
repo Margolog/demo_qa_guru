@@ -26,30 +26,59 @@ public class BaseTest {
     }
 
     @BeforeAll
-    static void beforeAll() {
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+    static void setup() {
+
+        Configuration.browser = "chrome";
+        Configuration.timeout = 10000;
         Configuration.browserSize = "1920x1080";
+        Configuration.savePageSource = true;
+        Configuration.screenshots = true;
         Configuration.baseUrl = "https://demoqa.com";
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
+
+        if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+            String[] possiblePaths = {
+                    "/usr/bin/chromedriver",
+                    "/usr/local/bin/chromedriver",
+                    "/snap/bin/chromedriver"
+            };
+
+            for (String path : possiblePaths) {
+                if (new java.io.File(path).exists()) {
+                    System.setProperty("webdriver.chrome.driver", path);
+                    break;
+                }
+            }
+        }
+
+        SelenideLogger.addListener("AllureSelenide",
+                new AllureSelenide()
+                        .screenshots(true)
+                        .savePageSource(true)
+        );
     }
 
-    @BeforeEach
-    void setUpTestData() {
-        testData = new TestData();
+
+    @AfterEach
+    void down() {
+        closeWebDriver();
     }
 
     @AfterEach
-    void afterEach() {
-        closeWebDriver();
-        Attach.screenshotAs("Last screenshotA");
+    void addAttachments() {
+        Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
-        Attach.addVideo();
         Attach.browserConsoleLogs();
+        Attach.addVideo();
+//        Attach.attachAsText("Some file", "Some content");
         closeWebDriver();
     }
 }
