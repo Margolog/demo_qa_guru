@@ -35,7 +35,7 @@ public class BaseTest {
 
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserSize = System.getProperty("browserResolution", "1920x1080");
-        Configuration.browserVersion = System.getProperty("browser_version", "128.0");
+        Configuration.browserVersion = System.getProperty("browserVersion");
         Configuration.baseUrl = System.getProperty("baseUrl");
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless","true"));
 
