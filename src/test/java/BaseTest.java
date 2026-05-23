@@ -33,12 +33,11 @@ public class BaseTest {
     @BeforeAll
     static void setup() {
 
-        Configuration.browser = "chrome";
-        Configuration.timeout = 10000;
-        Configuration.browserSize = "1920x1080";
-        Configuration.savePageSource = true;
-        Configuration.screenshots = true;
-        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserSize = System.getProperty("browserResolution", "1920x1080");
+        Configuration.browserVersion = System.getProperty("browser_version", "128.0");
+        Configuration.baseUrl = System.getProperty("baseUrl");
+        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless","true"));
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -46,8 +45,9 @@ public class BaseTest {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-
+        Configuration.savePageSource = true;
+        Configuration.screenshots = true;
+        Configuration.remote = System.getProperty("remote");
 
         if (System.getProperty("os.name").toLowerCase().contains("linux")) {
             String[] possiblePaths = {
