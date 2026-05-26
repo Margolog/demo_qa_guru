@@ -20,15 +20,6 @@ public class BaseTest {
     RegistrationPage registrationPage = new RegistrationPage();
     TestData testData;
 
-    @BeforeEach
-    void setUpTestData() {
-        testData = new TestData();
-    }
-
-    @BeforeEach
-    void addListener() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-    }
 
     @BeforeAll
     static void setup() {
@@ -69,11 +60,6 @@ public class BaseTest {
                         .screenshots(true)
                         .savePageSource(true)
         );
-    }
-
-    @AfterEach
-    void down() {
-        closeWebDriver();
     }
 
     @AfterEach
